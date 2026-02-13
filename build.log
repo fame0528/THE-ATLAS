@@ -1,0 +1,35 @@
+
+> the-atlas@0.1.0 build
+> next build
+
+node.exe :  GÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\spenc\AppData\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( GÜá Warning: N...not be correct.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ We detected multiple lockfiles and selected the directory of C:\Users\spenc\.openclaw\workspace\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\spenc\.openclaw\workspace\agent-dashboard\package-lock.json
+
+   Gû¦ Next.js 15.5.12
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ G£ô Compiled successfully in 1128ms
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/15) ...
+Error occurred prerendering page "/404". Read more: https://nextjs.org/docs/messages/prerender-error
+[Error: ENOENT: no such file or directory, open 'C:\Users\spenc\.openclaw\workspace\agent-dashboard\.next\server\pages-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\spenc\\.openclaw\\workspace\\agent-dashboard\\.next\\server\\pages-manifest.json'
+}
+Export encountered an error on /_error: /404, exiting the build.
+ G¿» Next.js build worker exited with code: 1 and signal: null
+
