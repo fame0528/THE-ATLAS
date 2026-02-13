@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
+import { getWorkspacePath } from "@/lib/workspace";
 import fs from "fs";
 import path from "path";
 
-// Determine workspace root: this file is in agent-dashboard/src/app/api/subagents/clear-log/route.ts
-// So go up 4 levels: clear-log -> subagents -> api -> src -> agent-dashboard -> workspace
-const WORKSPACE_ROOT = path.resolve(__dirname, '..', '..', '..', '..');
-const activityLogPath = path.join(WORKSPACE_ROOT, 'memory', 'subagents', 'activity-log.json');
-
 export async function POST() {
   try {
+    const workspaceRoot = getWorkspacePath();
+    const activityLogPath = path.join(workspaceRoot, 'memory', 'subagents', 'activity-log.json');
+
     // Clear activity log
     if (fs.existsSync(activityLogPath)) {
       fs.writeFileSync(activityLogPath, JSON.stringify({ version: '1.0.0', entries: [] }, null, 2));

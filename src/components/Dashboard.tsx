@@ -14,20 +14,19 @@ import MemoriesPanel from "@/components/MemoriesPanel";
 import DocumentsPanel from "@/components/DocumentsPanel";
 import TasksBrainPanel from "@/components/TasksBrainPanel";
 import BriefPanel from "@/components/BriefPanel";
-import FactoryPanel from "@/components/FactoryPanel";
 
 export default function Dashboard() {
   const toast = useToast();
   const settings = useAppSettings();
   const [showSettings, setShowSettings] = useState(false);
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'memories' | 'documents' | 'tasks' | 'brief' | 'factory'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'memories' | 'documents' | 'tasks' | 'brief'>('dashboard');
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 p-4 md:p-6">
       <div className="max-w-[1600px] mx-auto space-y-4">
         {/* Tab Navigation */}
         <div className="flex gap-2 border-b border-gray-800 pb-2">
-          {(['dashboard','memories','documents','tasks','brief','factory'] as const).map(tab => (
+          {(['dashboard','memories','documents','tasks','brief'] as const).map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -73,7 +72,6 @@ export default function Dashboard() {
 
         {activeTab === 'brief' && <BriefPanel />}
 
-        {activeTab === 'factory' && <FactoryPanel />}
       </div>
 
       <footer className="max-w-[1600px] mx-auto mt-6 pt-4 border-t border-gray-800 text-center text-xs text-gray-600 flex justify-between items-center">
