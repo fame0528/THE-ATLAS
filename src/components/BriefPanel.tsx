@@ -7,6 +7,14 @@ export default function BriefPanel() {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [configStatus, setConfigStatus] = useState<{hasDiscord: boolean, briefChannel?: string} | null>(null);
+
+  useEffect(() => {
+    fetch('/api/system/config/status')
+      .then(r => r.json())
+      .then(data => { if (data.ok) setConfigStatus(data.config); })
+      .catch(() => {});
+  }, []);
 
   const loadBrief = async (targetDate: string) => {
     setLoading(true);
