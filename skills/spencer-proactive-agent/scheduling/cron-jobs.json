@@ -173,6 +173,26 @@
       "enabled": true
     },
     {
+      "name": "Rhythm Intelligence",
+      "label": "proactive-rhythm",
+      "description": "Learns Spencer's daily patterns and publishes rhythm map",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\rhythm-intelligence.ps1"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "enabled": true
+    },
+    {
       "name": "Auto-Obsidian Sync",
       "label": "proactive-obsidian-sync",
       "description": "Syncs memory notes and TASKS.md to Obsidian vault",

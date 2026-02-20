@@ -65,6 +65,11 @@
           "unstable": 0.3,
           "stable": 0.1
         }
+      },
+      "rhythmIntelligence": {
+        "enabled": true,
+        "observationDays": 7,
+        "reportTime": "08:00"
       }
     },
     "personal-dashboard": {
