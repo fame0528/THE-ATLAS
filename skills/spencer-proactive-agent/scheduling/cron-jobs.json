@@ -324,6 +324,62 @@
       },
       "sessionTarget": "isolated",
       "enabled": true
+    },
+    {
+      "name": "Spencer Metrics",
+      "label": "proactive-spencer-metrics",
+      "description": "Collects Spencer-centric KPIs (deep work, daily notes, buffer health)",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 7 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\spencer-metrics.ps1"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
+      "name": "Experiment Runner",
+      "label": "proactive-experiment-runner",
+      "description": "Evaluates ongoing micro-experiments and reports status",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 11 * * 0",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\experiment-runner.ps1"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Weekly Sprint Summary",
+      "label": "proactive-weekly-sprint",
+      "description": "Comprehensive weekly review: projects, metrics, next week focus",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * 0",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\weekly-sprint-summary.ps1"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "enabled": true
     }
   ]
 }

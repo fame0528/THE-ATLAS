@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "description": "Micro-experiments for Spencer Metrics v1.0",
+  "experiments": [
+    {
+      "name": "Deep Work Adoption",
+      "hypothesis": "Enabling flow-aware scheduling will increase deep work hours by 20% within 2 weeks",
+      "metric": "deepWorkHours",
+      "target": 2.0,
+      "durationDays": 14,
+      "startDate": "2026-02-20"
+    },
+    {
+      "name": "Intrusion Reduction",
+      "hypothesis": "Adaptive frequency + flow checks will reduce intrusive alerts to <1 per week",
+      "metric": "intrusionEvents",
+      "target": 1,
+      "durationDays": 14,
+      "startDate": "2026-02-20"
+    },
+    {
+      "name": "Buffer Compression Efficiency",
+      "hypothesis": "200KB threshold yields average compression ratio >50%",
+      "metric": "bufferCompressionRatio",
+      "target": 50,
+      "durationDays": 7,
+      "startDate": "2026-02-20"
+    }
+  ]
+}
