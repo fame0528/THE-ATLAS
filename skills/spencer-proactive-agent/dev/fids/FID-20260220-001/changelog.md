@@ -7,14 +7,19 @@
 - [x] Integrated compression into `scripts/working-buffer.ps1`
 - [x] Added milestone detection scaffold (git push, build, deep work, self-care)
 - [x] Created `scripts/daily-digest.ps1` and added cron jobs (9 AM, 2 PM, 9 PM)
-- [x] Built `scripts/flow-context.ps1` (flow detection core)
+- [x] Built `scripts/flow-context.ps1` (flow detection core, now configurable)
 - [x] Built `scripts/Assert-Flow.ps1` (helper for cron scripts)
-- [x] Updated `scripts/empire-metrics.ps1` to respect flow
+- [x] Updated `scripts/empire-metrics.ps1` to respect flow and adaptive frequency
 - [x] Updated `scheduling/cron-jobs.json` with new jobs
 - [x] Created config `config/spencer-agent-v2.json`
 - [x] Updated `V2-IMPLEMENTATION-STATUS.md` and `V2-PHASE-1-ACTIVATION.md`
 - [x] ECHO dev tracking setup (`dev/planned.md`, `dev/fids/FID-20260220-001/`)
-- [ ] Pushed to GitHub (blocked by unrelated histories + secret scanning false positive)
+- [x] Pushed to GitHub (cleanly, ECHO-compliant)
+- [x] FID-20260220-002: Personal Dashboard complete (commit b80b3a8)
+- [x] FID-20260220-003: Time-Savers complete (commit dd45ef6)
+- [x] FID-20260220-004: Proactive Docs complete (commit e2e7fb2)
+- [x] Final docs update (commit 0a7edf3, c2c5c3e)
+- [x] Phase 1 Code Complete — Ready for alpha testing
 
 ## Notes
 
