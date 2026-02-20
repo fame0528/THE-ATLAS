@@ -117,6 +117,32 @@
       "stalenessNudges": true,
       "empireRegistry": true
     },
+    "stealth-security": {
+      "enabled": true,
+      "logRedaction": {
+        "enabled": true,
+        "patterns": [
+          "Bearer\\s+[A-Za-z0-9\\-_]+",
+          "Basic\\s+[A-Za-z0-9\\-_=]+",
+          "ghp_[A-Za-z0-9]+",
+          "sk_live_[A-Za-z0-9]+",
+          "xoxb-[A-Za-z0-9]+"
+        ]
+      },
+      "perimeterMonitoring": {
+        "enabled": true,
+        "sensitivePaths": [
+          ".secrets",
+          "credentials",
+          "config/spencer-agent-v2.json"
+        ],
+        "checkIntervalMinutes": 60
+      },
+      "securityAudit": {
+        "enabled": true,
+        "schedule": "0 6 * * 0"
+      }
+    },
   },
   "communication": {
     "reportToAtlas": true,

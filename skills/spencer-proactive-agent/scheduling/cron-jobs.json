@@ -380,6 +380,40 @@
         "channel": "last"
       },
       "enabled": true
+    },
+    {
+      "name": "Perimeter Monitor",
+      "label": "proactive-perimeter-monitor",
+      "description": "Watches sensitive directories for unauthorized changes",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 3600000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\perimeter-monitor.ps1"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Security Audit",
+      "label": "proactive-security-audit",
+      "description": "Periodic security posture check (secrets, ACLs, perimeter state)",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 6 * * 0",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\security-audit.ps1"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
     }
   ]
 }
