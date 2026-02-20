@@ -252,6 +252,38 @@
         "mode": "none"
       },
       "enabled": true
+    },
+    {
+      "name": "Wiki Sync",
+      "label": "proactive-wiki-sync",
+      "description": "Syncs docs to Obsidian wiki vault",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\wiki-sync.ps1"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
+      "name": "Empire Registry Update",
+      "label": "proactive-empire-registry",
+      "description": "Updates PROJECTS.md and flags stale projects",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\empire-registry.ps1"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
     }
   ]
 }

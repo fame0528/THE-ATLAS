@@ -84,10 +84,10 @@
       "credentialVault": true
     },
     "proactive-docs": {
-      "enabled": false,
+      "enabled": true,
       "autoReadmeUpdates": {
         "enabled": true,
-        "requireReaction": true,
+        "requireReaction": false,
         "reactionTimeoutHours": 24
       },
       "wikiSync": {
@@ -96,7 +96,7 @@
       },
       "stalenessNudges": true,
       "empireRegistry": true
-    }
+    },
   },
   "communication": {
     "reportToAtlas": true,
