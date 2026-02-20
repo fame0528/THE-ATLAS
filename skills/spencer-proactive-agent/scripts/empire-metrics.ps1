@@ -16,6 +16,36 @@ if (Test-Path $assertFlow) {
     $flowEnabled = $true
 }
 
+# Adaptive Frequency (v2.0) — skip if not time based on stability
+$adaptiveConfig = $null
+$stateFile = Join-Path $Workspace "memory\topics\empire-health-state.json"
+if ($flowEnabled -and $Config -and $Config.features.'flow-aware-scheduling'.adaptiveFrequency.enabled) {
+    $adaptiveConfig = $Config.features.'flow-aware-scheduling'.adaptiveFrequency
+    $now = Get-Date
+    $shouldRun = $true
+
+    if (Test-Path $stateFile) {
+        try {
+            $state = Get-Content $stateFile -Raw | ConvertFrom-Json
+            $lastCheck = [datetime]$state.lastCheck
+            $lastStability = $state.stability
+            $intervalMs = $adaptiveConfig.healthCheckIntervals.$lastStability
+            $intervalMin = $intervalMs / 60000
+            $minutesSince = ($now - $lastCheck).TotalMinutes
+
+            if ($minutesSince -lt $intervalMin) {
+                $shouldRun = $false
+                Write-Verbose ("Adaptive skip: {0}m since last check (interval {1}m, state: {2})" -f [math]::Round($minutesSince,1), $intervalMin, $lastStability)
+            }
+        }
+        catch { $shouldRun = $true }
+    }
+
+    if (-not $shouldRun) {
+        exit 0
+    }
+}
+
 function Get-HealthStatus {
     if (-not (Test-Path $statusFile)) {
         return @{ healthy = $false; message = "No health status file found."; last_run = $null; articles_published = 0; errors_last_24h = 0 }
@@ -93,4 +123,30 @@ if ($script:alertSent) {
     Write-Host "Alert sent to Discord."
 } else {
     Write-Host "No alerts needed."
+}
+
+# Update adaptive state (if config enabled)
+if ($adaptiveConfig) {
+    # Determine stability based on current health status
+    $stability = "normal"
+    if (-not $status.healthy) {
+        $stability = "unstable"
+    } else {
+        $errors = [int]$status.errors_last_24h
+        if ($errors -eq 0) {
+            $stability = "stable"
+        } elseif ($errors -ge 5) {
+            $stability = "unstable"
+        }
+    }
+
+    $state = @{
+        lastCheck = (Get-Date).ToString("o")
+        stability = $stability
+        healthy = $status.healthy
+        errors_last_24h = $status.errors_last_24h
+        articles_published = $status.articles_published
+    } | ConvertTo-Json -Depth 3
+
+    Set-Content -Path $stateFile -Value $state -Encoding UTF8
 }

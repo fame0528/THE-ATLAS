@@ -40,13 +40,19 @@
 - [x] **Cron Jobs:** `buffer-compress` (5 min), `daily-digest` (9 AM, 2 PM, 9 PM)
 - [x] **Notification Batching:** `daily-digest.ps1` collects milestones + buffer stats
 
-### Flow-Aware Scheduling (Weeks 3-4) — IN PROGRESS
+### Flow-Aware Scheduling (Weeks 3-4) — COMPLETE
 - [x] **Core Module:** `flow-context.ps1` (quiet hours, deep work detection, natural break, Should-SendNotification, channel routing)
-- [ ] **Cron Integration:** Wrap existing jobs with flow-aware wrapper
-- [ ] **Adaptive Frequency:** Empire health check interval based on instability
-- [ ] **Deep Work Protection:** Suppress non-critical during deep work
-- [ ] **Persona Routing:** All cron outputs route to persona channels (#hyperion, #epimetheus, etc.)
-- [ ] **Spencer Controls:** `atlas flow deep`, `atlas flow normal`, `atlas quiet until 8am`, `atlas batch now`
+- [x] **Cron Integration:** All alert-sending jobs wrapped with flow checks:
+  - [x] `working-buffer.ps1` (already had flow checks integrated)
+  - [x] `empire-metrics.ps1` (flow guard in Send-Alert)
+  - [x] `wellness-harmony.ps1` (added flow wrapper)
+  - [x] `daily-note-check.ps1` (new script with flow)
+  - [x] `weekly-metrics.ps1` (new script with flow)
+  - [x] `monthly-review.ps1` (new script with flow)
+- [x] **Adaptive Frequency:** Empire health check runs every 30min but skips based on stability (state file)
+- [x] **Deep Work Protection:** Non-critical alerts suppressed during deep work (normal priority blocked)
+- [ ] **Persona Routing:** All cron outputs route to persona channels (#hyperion, #epimetheus, etc.) — currently use #last
+- [ ] **Spencer Controls:** `atlas flow deep`, `atlas flow normal`, `atlas quiet until 8am`, `atlas batch now` — planned for post-alpha
 
 ### Personal Dashboard v1.0 (Weeks 5-6)
 - [ ] Data collection scripts (articles, systems, income, health)

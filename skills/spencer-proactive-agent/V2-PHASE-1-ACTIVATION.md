@@ -67,13 +67,13 @@
     - Roadmap with 30-60-90 day plan
 
 ### 🔄 In Progress (Next Up)
-- **Flow-Aware Scheduling Integration:** Update all cron job payloads to respect flow (inline messages and script calls). This will ensure deep work protection and quiet hours across the board.
-- **Adaptive Frequency:** Empire health check interval adjustment based on instability (config-based heuristics).
-- **Persona Routing:** Ensure all cron outputs route to correct persona channels (#hyperion, #epimetheus, etc.) — currently some use `#last`, need refinement.
-- **Personal Dashboard UI:** Build the HTML dashboard (`dashboard/index.html`) with TL;DR grid and color coding.
-- **Time-Savers Integrations:** Auto-Obsidian sync, skill auto-registration, one-click Discord, GitHub shortcuts, credential vault.
-- **Proactive Documentation Engine:** Git push detector, auto-README updates, wiki sync, empire registry auto-maintenance.
-- **Testing & Alpha Validation:** Unit tests, flow simulation, Spencer alpha feedback (2 weeks).
+- ✅ **Flow-Aware Scheduling Integration** — All cron jobs now respect quiet hours (10 PM-7 AM), deep work detection, and natural breaks. Scripts: `flow-context.ps1`, `Assert-Flow.ps1`, updated `working-buffer.ps1`, `empire-metrics.ps1`, `wellness-harmony.ps1`, plus new `daily-note-check.ps1`, `weekly-metrics.ps1`, `monthly-review.ps1`.
+- ✅ **Adaptive Frequency** — Empire health check runs every 30 min but skips based on stability (state stored in `memory/topics/empire-health-state.json`).
+- ⏳ **Persona Routing** — Cron outputs currently use #last; should route to #hyperion, #epimetheus, etc. (postpone)
+- ⏳ **Personal Dashboard UI** — Build the HTML dashboard (`dashboard/index.html`) with TL;DR grid and color coding.
+- ⏳ **Time-Savers Integrations** — Auto-Obsidian sync, skill auto-registration, one-click Discord, GitHub shortcuts, credential vault.
+- ⏳ **Proactive Documentation Engine** — Git push detector, auto-README updates, wiki sync, empire registry auto-maintenance.
+- ⏳ **Testing & Alpha Validation** — Unit tests, flow simulation, Spencer alpha feedback (2 weeks).
 
 ---
 

@@ -39,22 +39,34 @@ function Get-FlowState {
 }
 
 function Test-QuietHours {
-    # Check if current time is within quiet hours (10 PM - 7 AM)
+    # Check if current time is within quiet hours from config
     $now = Get-Date
-    $hour = $now.Hour
+    $isQuiet = $false
     
-    $quietStart = 22
-    $quietEnd = 7
-    
-    # Adjust for midnight crossing
-    if ($hour -ge $quietStart -or $hour -lt $quietEnd) {
-        $script:FlowContext.IsQuietHours = $true
-        $script:FlowContext.CurrentState = "quiet"
-        return $true
+    if ($script:Config -and $script:Config.features.'flow-aware-scheduling'.quietHours) {
+        $qh = $script:Config.features.'flow-aware-scheduling'.quietHours
+        $startStr = $qh.start  # "22:00"
+        $endStr = $qh.end      # "07:00"
+        
+        # Parse times
+        $startHour = [int]$startStr.Split(':')[0]
+        $endHour = [int]$endStr.Split(':')[0]
+        
+        # Check if current hour is in quiet range (handles midnight crossing)
+        if ($now.Hour -ge $startHour -or $now.Hour -lt $endHour) {
+            $isQuiet = $true
+        }
+    }
+    else {
+        # Fallback to hardcoded 22:00-07:00
+        if ($now.Hour -ge 22 -or $now.Hour -lt 7) {
+            $isQuiet = $true
+        }
     }
     
-    $script:FlowContext.IsQuietHours = $false
-    return $false
+    $script:FlowContext.IsQuietHours = $isQuiet
+    if ($isQuiet) { $script:FlowContext.CurrentState = "quiet" }
+    return $isQuiet
 }
 
 function Test-DeepWork {

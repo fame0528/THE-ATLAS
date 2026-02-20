@@ -41,10 +41,10 @@
     {
       "name": "Empire Health Check",
       "label": "proactive-empire-health",
-      "description": "Monitors income bot health and sends alerts if failing",
+      "description": "Monitors income bot health with adaptive frequency (runs every 30m, but skips based on stability)",
       "schedule": {
         "kind": "every",
-        "everyMs": 21600000
+        "everyMs": 1800000
       },
       "payload": {
         "kind": "agentTurn",
@@ -67,7 +67,7 @@
       },
       "payload": {
         "kind": "agentTurn",
-        "message": "Check if yesterday's daily note exists in memory/facts/. If missing, send one-line reminder to #atlas: 'Good morning! We didn't log yesterday. Quick recap?'"
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\daily-note-check.ps1"
       },
       "sessionTarget": "isolated",
       "enabled": true
@@ -83,9 +83,13 @@
       },
       "payload": {
         "kind": "agentTurn",
-        "message": "Read memory/topics/empire-metrics.md (last 7 days). Calculate articles added, uptime %, errors. Post summary + 3 actionable suggestions to #atlas."
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\weekly-metrics.ps1"
       },
       "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
       "enabled": true
     },
     {
@@ -99,9 +103,13 @@
       },
       "payload": {
         "kind": "agentTurn",
-        "message": "Read memory/topics/empire-metrics/ (30 days). Compare to prior month. Post trends, health score, next month goals + reflection questions to #atlas."
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\monthly-review.ps1"
       },
       "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
       "enabled": true
     },
     {

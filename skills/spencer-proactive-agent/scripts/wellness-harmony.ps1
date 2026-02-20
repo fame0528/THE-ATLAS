@@ -1,7 +1,16 @@
-# Wellness Harmony (PS2-compatible)
+# Wellness Harmony (PS2-compatible) — v2.0
 param(
     [string]$Workspace = "C:\Users\spenc\.openclaw\workspace"
 )
+
+# Flow-aware: respect quiet hours and deep work
+$assertFlow = Join-Path $PSScriptRoot "Assert-Flow.ps1"
+if (Test-Path $assertFlow) {
+    . $assertFlow
+    if (-not (Test-FlowAllowed -Priority "normal" -Workspace $Workspace)) {
+        exit 0
+    }
+}
 
 $log = Join-Path $Workspace "memory\logs\sync-memory.log"
 $careFile = $Workspace + "\memory\self-care\" + (Get-Date -Format 'yyyy-MM-dd') + ".json"

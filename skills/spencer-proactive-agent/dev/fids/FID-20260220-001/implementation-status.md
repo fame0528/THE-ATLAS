@@ -10,11 +10,11 @@
 | Buffer Compression | ✅ | Integrated, logging to memory/logs/buffer-compression.log |
 | Milestone Detection | ✅ | Git push, build status, deep work, self-care |
 | Daily Digest | ✅ | Script created, cron jobs added (9 AM, 2 PM, 9 PM) |
-| Flow Context | ✅ | quietHours, deepWork, naturalBreak detection |
-| Assert-Flow Helper | ✅ | Test-FlowAllowed function ready |
+| Flow Context | ✅ | quietHours, deepWork, naturalBreak detection, now configurable |
+| Assert-Flow Helper | ✅ | Test-FlowAllowed function used in all alert scripts |
 | Empire Metrics Flow Guard | ✅ | High priority alerts respect quiet hours |
-| Cron Integration |Partial| New jobs added; existing jobs need flow wrappers |
-| Adaptive Frequency | 🔄 | Config defined, not yet implemented in empire-metrics |
+| Cron Integration | ✅ | All alert-sending jobs wrapped: working-buffer, empire-metrics, wellness-harmony, daily-note-check, weekly-metrics, monthly-review |
+| Adaptive Frequency | ✅ | Empire health check adaptive intervals (unstable 30m, normal 2h, stable 4h) |
 | Personal Dashboard | ⏳ | Next FID |
 | Time-Savers | ⏳ | Next FID |
 | Proactive Docs Engine | ⏳ | Next FID |
