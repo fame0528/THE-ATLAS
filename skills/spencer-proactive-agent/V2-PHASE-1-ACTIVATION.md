@@ -9,6 +9,8 @@
 ## 📦 What's Been Built
 
 ### ✅ Completed (Ready Now)
+All Phase 1 features are implemented and ready for alpha testing.
+
 1. **Buffer Auto-Compression Engine** — `scripts/Compress-Buffer.ps1`
    - Compresses SESSION-STATE.md at 200KB threshold
    - Summarizes decisions/metrics to `memory/topics/active-session.md`
@@ -31,7 +33,7 @@
    - Three daily batches: 9 AM, 2 PM, 9 PM
 
 5. **Flow Context Module** — `scripts/flow-context.ps1`
-   - Quiet hours detection (10 PM - 7 AM)
+   - Quiet hours detection (configurable, default 10 PM - 7 AM)
    - Deep work detection (typing, git push, DND, buffer spike)
    - Natural break detection (5+ min inactivity)
    - Notification routing decisions (`Should-SendNotification`, `Get-TargetChannel`)
@@ -42,29 +44,54 @@
    - Auto-initializes flow context
 
 7. **Empire Metrics Flow Guard** — `scripts/empire-metrics.ps1`
-   - Sends Discord alerts only if flow allows (high priority)
+   - Sends Discord alerts only if flow allows (high priority can break deep work but not quiet hours)
    - Still writes metrics report always
 
-8. **Cron Manifest Updates** — `scheduling/cron-jobs.json`
-   - New jobs: `buffer-compress` (every 5 min), `daily-digest` (3x daily)
-   - Existing jobs ready for flow integration (payload modifications pending)
+8. **Adaptive Frequency** — Built into `empire-metrics.ps1`
+   - Runs every 30 min but skips based on stability state (unstable/normal/stable intervals)
+   - State stored in `memory/topics/empire-health-state.json`
 
-9. **v2.0 Configuration** — `config/spencer-agent-v2.json`
-   - Feature flags for all Phase 1-3 upgrades
-   - Toggle any component on/off without code changes
+9. **Cron Manifest Updates** — `scheduling/cron-jobs.json`
+   - All alert-sending scripts wrapped with flow checks
+   - New jobs: `buffer-compress`, `daily-digest`, `personal-dashboard`, `auto-obsidian-sync`, `skill-auto-register`, `wiki-sync`, `empire-registry`, plus updated `daily-note-check`, `weekly-metrics`, `monthly-review`
 
-10. **Phase 1 Initialization** — `scripts/Initialize-v2.Upgrades.ps1`
+10. **Personal Dashboard v1.0** — `scripts/generate-dashboard.ps1`
+    - Generates HTML dashboard (`dashboard/latest.html`) every 30 min
+    - Aggregates empire health, buffer size, recent milestones
+    - Color-coded health indicator, dark theme
+
+11. **Time-Savers Pack**
+    - `auto-obsidian-sync.ps1` — syncs memory/facts and TASKS.md to Obsidian vault
+    - `skill-auto-register.ps1` — maintains skills registry
+    - `discord-shortcuts.ps1` — quick Discord messages (presets)
+    - `github-shortcuts.ps1` — GitHub CLI shortcuts (pr, issue, clone, etc.)
+    - `credential-vault.ps1` — Windows Credential Manager wrapper
+
+12. **Proactive Docs Engine**
+    - `auto-readme.ps1` — auto-updates README badges
+    - `wiki-sync.ps1` — syncs docs/ to Obsidian wiki vault
+    - `empire-registry.ps1` — generates PROJECTS.md from TASKS.md and flags stale projects
+
+13. **v2.0 Configuration** — `config/spencer-agent-v2.json`
+    - Feature flags for all Phase 1-3 upgrades
+    - Toggle any component on/off without code changes
+    - All Phase 1 features enabled by default
+
+14. **Phase 1 Initialization** — `scripts/Initialize-v2.Upgrades.ps1`
     - Sets up required directories
     - Creates placeholder files
     - Validates environment
 
-11. **Implementation Tracker** — `IMPLEMENTATION-TRACKER.md`
+15. **Implementation Tracker** — `V2-IMPLEMENTATION-STATUS.md`
     - Progress visibility
-    - Task checklist
 
-12. **All 10 Deliverable Documents** — `upgrades/` folder
+16. **Activation Guide** — `V2-PHASE-1-ACTIVATION.md`
+    - Spencer-facing quick start
+
+17. **All 10 Deliverable Documents** — `upgrades/` folder
     - Complete design specs for all persona upgrades
     - Roadmap with 30-60-90 day plan
+
 
 ### 🔄 In Progress (Next Up)
 - ✅ **Flow-Aware Scheduling Integration** — All cron jobs now respect quiet hours (10 PM-7 AM), deep work detection, and natural breaks. Scripts: `flow-context.ps1`, `Assert-Flow.ps1`, updated `working-buffer.ps1`, `empire-metrics.ps1`, `wellness-harmony.ps1`, plus new `daily-note-check.ps1`, `weekly-metrics.ps1`, `monthly-review.ps1`.
