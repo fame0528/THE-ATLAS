@@ -193,6 +193,26 @@
       "enabled": true
     },
     {
+      "name": "Habit Streaks Check",
+      "label": "proactive-habit-streaks",
+      "description": "Checks habit completion and reports current streaks",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 8 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\habit-streaks.ps1 -HabitName exercise; powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\habit-streaks.ps1 -HabitName writing; powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\habit-streaks.ps1 -HabitName learning"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "enabled": true
+    },
+    {
       "name": "Auto-Obsidian Sync",
       "label": "proactive-obsidian-sync",
       "description": "Syncs memory notes and TASKS.md to Obsidian vault",

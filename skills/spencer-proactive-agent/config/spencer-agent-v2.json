@@ -70,6 +70,21 @@
         "enabled": true,
         "observationDays": 7,
         "reportTime": "08:00"
+      },
+      "memoryCompanion": {
+        "enabled": true,
+        "decisionReplay": {
+          "enabled": true,
+          "accessThresholdHours": 24
+        },
+        "habitStreaks": {
+          "enabled": true,
+          "trackedHabits": ["exercise", "writing", "learning", "deep-work"]
+        },
+        "contextRescue": {
+          "enabled": true,
+          "autoSummarizeOnCompress": true
+        }
       }
     },
     "personal-dashboard": {
