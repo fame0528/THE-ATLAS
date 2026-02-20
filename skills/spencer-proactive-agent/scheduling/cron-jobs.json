@@ -173,6 +173,21 @@
       "enabled": true
     },
     {
+      "name": "Personal Dashboard Generation",
+      "label": "proactive-dashboard-generate",
+      "description": "Generates HTML dashboard with TL;DR metrics grid (every 30 min)",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 1800000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\generate-dashboard.ps1"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
       "name": "Buffer Rotation",
       "label": "proactive-buffer-rotate",
       "description": "Archives old working buffer and starts fresh",

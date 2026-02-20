@@ -68,11 +68,11 @@
       }
     },
     "personal-dashboard": {
-      "enabled": false,
+      "enabled": true,
       "refreshIntervalMinutes": 30,
       "outputPath": "dashboard/latest.json",
       "htmlPath": "dashboard/index.html",
-      "autoPostToHyperion": true,
+      "autoPostToHyperion": false,
       "postTime": "08:00"
     },
     "time-savers": {
