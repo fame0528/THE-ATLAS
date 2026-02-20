@@ -1,0 +1,25 @@
+{
+  "name": "spencer-proactive-agent",
+  "version": "1.0.0",
+  "description": "Proactive memory augmentation and empire-health monitoring agent fine-tuned for Spencer's needs (brain injury memory support, income bot supervision, gentle check-ins).",
+  "author": "Atlas (Olympus Swarm)",
+  "license": "MIT",
+  "compatibility": {
+    "minOpenClawVersion": "2026.2.17",
+    "maxContextModel": "stepfun/step-3.5-flash:free"
+  },
+  "dependencies": [],
+  "optionalDependencies": [],
+  "entry": null,
+  "hooks": [],
+  "subagents": [],
+  "tags": [
+    "memory",
+    "wally",
+    "proactive",
+    "empire-building",
+    "Spencer-custom"
+  ],
+  "homepage": "https://github.com/openclaw/openclaw",
+  "support": "Contact Atlas in #atlas"
+}

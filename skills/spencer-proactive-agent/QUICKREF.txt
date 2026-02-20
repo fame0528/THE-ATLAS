@@ -1,0 +1,95 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   SPENCER'S PROACTIVE AGENT — QUICK REF                     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌─ WHAT THIS DOES ─────────────────────────────────────────────────────────────┐
+│ • Remembers important things you say (WAL Protocol)                         │
+│ • Monitors Income Bot health                                               │
+│ • Gentle check-ins (daytime only, respects sleep)                         │
+│ • Auto-recovers if context overflows                                      │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ DAILY RHYTHM ───────────────────────────────────────────────────────────────┐
+│ 8 AM      → Daily note check (silent)                                      │
+│ Every 30m → Empire health monitor                                          │
+│ 6-9 PM    → Possible gentle check-in                                      │
+│ 10 PM-7AM → ASLEEP — no notifications                                      │
+│ Midnight  → Working buffer archive                                        │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ WAL PROTOCOL (YOUR MEMORY) ─────────────────────────────────────────────────┐
+│ IF you say any of these → I CAPTURE BEFORE RESPONDING:                    │
+│   • Decisions: "Let's do X", "Use Y"                                      │
+│   • Preferences: "I like", "Don't want"                                   │
+│   • Numbers: "We're at 50 articles", "Made $100"                          │
+│   • Corrections: "It's X not Y"                                           │
+│   • Names/Places/People                                                   │
+│                                                                           │
+│ WHERE → SESSION-STATE.md (auto-synced to Obsidian)                       │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ COMPACTION RECOVERY ───────────────────────────────────────────────────────┐
+│ IF you say: "where were we?", "continue", "what were we doing?"           │
+│ → I read: working-buffer.md + SESSION-STATE.md + yesterday's note        │
+│ → I restore context and tell you where we left off                       │
+│ → NEVER need to repeat yourself                                          │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ EMPIRE HEALTH TRACKING ────────────────────────────────────────────────────┐
+│ Script: scripts\empire-metrics.ps1                                         │
+│ Checks: income_bot/data/health/status.json                                │
+│ Alerts: Discord #atlas if bot fails or errors > 0                         │
+│ Report: memory/topics/empire-metrics.md                                   │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ COMMANDS YOU MIGHT NEED ────────────────────────────────────────────────────┐
+│ Install cron jobs:    .\scheduling\install-cron.ps1                       │
+│ Verify cron jobs:     .\scheduling\verify-cron.ps1                        │
+│ Remove all cron jobs: .\scheduling\uninstall-cron.ps1                     │
+│ Force context rebuild: .\scripts\recover-context.ps1 -Force              │
+│ Manual health check:  .\scripts\empire-metrics.ps1                        │
+│ Send test alert:      .\integrations\discord.ps1 -Message "test"         │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ FILES TO KNOW ──────────────────────────────────────────────────────────────┐
+│ SESSION-STATE.md          → Your active working memory (WAL target)       │
+│ memory/working-buffer.md  → Danger zone log (auto-rotated)                │
+│ memory/topics/            → Metrics & status reports                     │
+│ CONFIGURATION.md          → Settings (tweak if needed)                   │
+│ HANDBOOK.md               → Daily use deep dive                          │
+│ FAQ.md                    → Common questions                             │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ DISABLING FEATURES ────────────────────────────────────────────────────────┐
+│ Stop all proactive agent:                                                  │
+│   openclaw cron remove --label "proactive-*"                              │
+│                                                                           │
+│ Stop just check-ins:                                                      │
+│   openclaw cron remove --label "proactive-proactive-checkin"              │
+│                                                                           │
+│ Disable WAL: (not recommended)                                           │
+│   Edit CONFIGURATION.md → set "compaction.mode": "off"                  │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ EMERGENCY: "THIS IS TOO MUCH" ────────────────────────────────────────────┐
+│ 1. Stop cron: .\scheduling\uninstall-cron.ps1                             │
+│ 2. Keep WAL — it's actually helping your memory                          │
+│ 3. Tell me (Atlas) in #atlas — we'll adjust                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ TONE & STYLE ──────────────────────────────────────────────────────────────┐
+│ • Gentle, not pushy                                                       │
+│ • Warm, not corporate                                                    │
+│ • Concise but complete                                                   │
+│ • Respects your medical needs (sleep, routine)                          │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ SUPPORT ────────────────────────────────────────────────────────────────────┐
+│ Read: HANDBOOK.md (full guide)                                           │
+│ Ask: @Atlas in #atlas (I'm your partner)                                 │
+│ Docs: All files in this skill directory                                  │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  "I am Atlas. I remember so you can build your empire." — 2026-02-19       ║
+╚══════════════════════════════════════════════════════════════════════════════╝

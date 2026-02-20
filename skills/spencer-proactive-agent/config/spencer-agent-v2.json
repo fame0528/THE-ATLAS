@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "description": "Spencer Proactive Agent v2.0 Configuration — Phase 1 Feature Flags",
+  "version": "2.0.0-alpha.1",
+  "features": {
+    "invisible-assistant": {
+      "enabled": true,
+      "bufferCompression": {
+        "thresholdBytes": 200000,
+        "keepLines": 50,
+        "summaryPath": "memory/topics/active-session.md"
+      },
+      "milestoneAlerts": {
+        "enabled": true,
+        "triggers": {
+          "gitPush": true,
+          "buildSuccess": true,
+          "buildFailure": true,
+          "deepWork": {
+            "enabled": true,
+            "thresholdMinutes": 240
+          },
+          "selfCareMissed": true
+        }
+      },
+      "wakeOnTouch": {
+        "enabled": false,
+        "triggers": ["discord_mention", "file_change_scripts", "manual_atlas_status"]
+      }
+    },
+    "flow-aware-scheduling": {
+      "enabled": true,
+      "quietHours": {
+        "start": "22:00",
+        "end": "07:00",
+        "timezone": "America/New_York"
+      },
+      "deepWork": {
+        "enabled": true,
+        "detection": {
+          "typingThresholdMinutes": 15,
+          "gitPushWindowMinutes": 30,
+          "discordDNDCheck": true,
+          "bufferSpikeKBPerMin": 5
+        },
+        "suppressNonCritical": true
+      },
+      "notificationClustering": {
+        "enabled": true,
+        "batches": [
+          { "time": "09:00", "label": "morning" },
+          { "time": "14:00", "label": "afternoon" },
+          { "time": "21:00", "label": "evening" }
+        ],
+        "maxPerBatch": 10
+      },
+      "adaptiveFrequency": {
+        "enabled": true,
+        "healthCheckIntervals": {
+          "unstable": "30m",
+          "normal": "2h",
+          "stable": "4h"
+        },
+        "stabilityThresholds": {
+          "unstable": 0.3,
+          "stable": 0.1
+        }
+      }
+    },
+    "personal-dashboard": {
+      "enabled": false,
+      "refreshIntervalMinutes": 30,
+      "outputPath": "dashboard/latest.json",
+      "htmlPath": "dashboard/index.html",
+      "autoPostToHyperion": true,
+      "postTime": "08:00"
+    },
+    "time-savers": {
+      "enabled": false,
+      "autoObsidianSync": true,
+      "skillAutoRegistration": true,
+      "oneClickDiscord": true,
+      "githubShortcuts": true,
+      "credentialVault": true
+    },
+    "proactive-docs": {
+      "enabled": false,
+      "autoReadmeUpdates": {
+        "enabled": true,
+        "requireReaction": true,
+        "reactionTimeoutHours": 24
+      },
+      "wikiSync": {
+        "enabled": true,
+        "schedule": "09:00"
+      },
+      "stalenessNudges": true,
+      "empireRegistry": true
+    }
+  },
+  "communication": {
+    "reportToAtlas": true,
+    "logLevel": "INFO",
+    "suppressAllDuringQuietHours": true
+  }
+}

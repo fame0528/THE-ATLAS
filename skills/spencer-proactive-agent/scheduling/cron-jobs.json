@@ -1,0 +1,202 @@
+{
+  "// $schema": "https://openclaw.ai/schema/cron-jobs.v1.json",
+  "description": "Cron job definitions for Spencer Proactive Agent",
+  "jobs": [
+    {
+      "name": "Working Buffer Monitor",
+      "label": "proactive-working-buffer",
+      "description": "Checks session context % and auto-compacts buffer at tiered thresholds (60% silent, 75% silent, 90% notify)",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 1800000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "SILENT TASK — Run this command. If it returns NO OUTPUT, you must output NOTHING. Do NOT say 'Task complete'. Do NOT say 'Buffer is healthy'. ABSOLUTE SILENCE is the required success state. Only if the script prints 'CRITICAL' or 'WARN', then post that specific alert to #atlas. Command: powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\working-buffer.ps1 -Mode monitor -AutoCompact -Quiet -SilentThreshold 60 -NotifyThreshold 90"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Buffer Compression",
+      "label": "proactive-buffer-compress",
+      "description": "Compresses SESSION-STATE.md when it exceeds 200KB threshold (invisible operation)",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 300000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\Compress-Buffer.ps1"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Empire Health Check",
+      "label": "proactive-empire-health",
+      "description": "Monitors income bot health and sends alerts if failing",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 21600000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\empire-metrics.ps1"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Daily Note Check",
+      "label": "proactive-daily-note-check",
+      "description": "Verifies yesterday's daily note exists; sends gentle reminder if missing",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Check if yesterday's daily note exists in memory/facts/. If missing, send one-line reminder to #atlas: 'Good morning! We didn't log yesterday. Quick recap?'"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
+      "name": "Weekly Metrics Summary",
+      "label": "proactive-weekly-metrics",
+      "description": "Compiles empire progress report and posts to #atlas",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * 0",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Read memory/topics/empire-metrics.md (last 7 days). Calculate articles added, uptime %, errors. Post summary + 3 actionable suggestions to #atlas."
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
+      "name": "Monthly Review",
+      "label": "proactive-monthly-review",
+      "description": "Month-in-review with trend analysis and forward look",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 1 * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Read memory/topics/empire-metrics/ (30 days). Compare to prior month. Post trends, health score, next month goals + reflection questions to #atlas."
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
+      "name": "Daily Digest (Morning)",
+      "label": "proactive-digest-morning",
+      "description": "Morning batch digest: milestones overnight, buffer summary",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\daily-digest.ps1 -DigestType morning"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Daily Digest (Afternoon)",
+      "label": "proactive-digest-afternoon",
+      "description": "Afternoon batch digest: progress check, buffer updates",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 14 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\daily-digest.ps1 -DigestType afternoon"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Daily Digest (Evening)",
+      "label": "proactive-digest-evening",
+      "description": "Evening batch digest: wrap-up, prep for next day",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 21 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\daily-digest.ps1 -DigestType evening"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Buffer Rotation",
+      "label": "proactive-buffer-rotate",
+      "description": "Archives old working buffer and starts fresh",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 0 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\working-buffer.ps1 -Mode rotate"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
+      "name": "Wellness Harmony",
+      "label": "proactive-wellness-harmony",
+      "description": "Coordinates with self-care reminders to prevent notification conflicts",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 21600000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\wellness-harmony.ps1"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "enabled": true
+    }
+  ]
+}
