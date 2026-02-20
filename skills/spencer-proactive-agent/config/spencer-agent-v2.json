@@ -76,7 +76,7 @@
       "postTime": "08:00"
     },
     "time-savers": {
-      "enabled": false,
+      "enabled": true,
       "autoObsidianSync": true,
       "skillAutoRegistration": true,
       "oneClickDiscord": true,

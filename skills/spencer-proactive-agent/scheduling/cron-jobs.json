@@ -173,6 +173,38 @@
       "enabled": true
     },
     {
+      "name": "Auto-Obsidian Sync",
+      "label": "proactive-obsidian-sync",
+      "description": "Syncs memory notes and TASKS.md to Obsidian vault",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 * * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\auto-obsidian-sync.ps1"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
+      "name": "Skill Auto-Registration",
+      "label": "proactive-skill-register",
+      "description": "Scans skills/ and updates registry.json",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 3 * * *",
+        "tz": "America/New_York"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "powershell -File C:\\Users\\spenc\\.openclaw\\workspace\\skills\\spencer-proactive-agent\\scripts\\skill-auto-register.ps1"
+      },
+      "sessionTarget": "isolated",
+      "enabled": true
+    },
+    {
       "name": "Personal Dashboard Generation",
       "label": "proactive-dashboard-generate",
       "description": "Generates HTML dashboard with TL;DR metrics grid (every 30 min)",
